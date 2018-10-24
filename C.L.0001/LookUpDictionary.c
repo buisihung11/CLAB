@@ -26,6 +26,7 @@ int isSubsequence(char shortStr[], char longStr[]){
 	while(shortStr[x]!='\0' && longStr[y]!='\0'){
 			if(shortStr[x]==longStr[y]){
 				x++;
+				y++;
 			}else{
 				y++;
 			}
@@ -79,7 +80,7 @@ int checkMatchscore(char firstStr[],char secondStr[]){
 			notMatchScore++;
 		}
 	}
-	if(notMatchScore<3){
+	if(notMatchScore<2){
 		check = 1;
 	}
 
@@ -137,7 +138,7 @@ int isInDictionary(char ** source, char str[30],int length){
 	for (int i = 0; i < length; ++i)
 	{
 		int wordLength = strlen(source[i]);
-		if(wordLength == strLength){
+		if(wordLength == strLength ){
 			if(isSubString(str,source[i])){
 				
 				check = TRUE;
@@ -156,34 +157,35 @@ void searchingPossible(char ** source, char str[30],int length){
 		int wordLength = strlen(source[i]);
 
 			
-		if(wordLength < strLength ){
+		if(wordLength < strLength && strLength - wordLength <=3){
 			if(isSubString(source[i],str)){
-				//printf("check SubString\n");
+				printf("check SubString\n");
 				printf("%s\n",source[i]);
-			}else if(isSubsequence(source[i],str)){
-				//printf("check SubSequence\n");
+			}
+			if(isSubsequence(source[i],str)){
+				printf("check SubSequence\n");
 				printf("%s\n",source[i]);
 			}
 		}
-		if(wordLength > strLength){
+		if(wordLength > strLength && wordLength - strLength <=3 ){
 			if(isSubString(str,source[i])){
-				//printf("check SubString\n");
+				printf("check SubString\n");
 				printf("%s\n",source[i] );
 			}else if(isSubsequence(str,source[i])){
-				//printf("check Subsequence\n");
+				printf("check Subsequence\n");
 				printf("%s\n",source[i] );
 			}
 		}
 		if(wordLength == strLength ){
 			
 			if(isSubsequence(source[i],str)){
-				//printf("check Subsequence\n");
+				printf("check Subsequence\n");
 				printf("%s\n",source[i] );
 			}else if(isPermutation(source[i],str)){
-				//printf("check isPermutation\n");
+				printf("check isPermutation\n");
 				printf("%s\n",source[i] );
 			}else if(checkMatchscore(source[i],str)){
-				//printf("check MatchScore\n");
+				printf("check MatchScore\n");
 				printf("%s\n",source[i]);
 			}
 		}
