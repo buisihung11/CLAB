@@ -1,0 +1,14 @@
+se1
+buisihung
+789000.000
+1.600
+3
+se2
+lethuhuong
+456000.000
+2.300
+3
+se3
+buisikhoi
+12300.000
+8.300

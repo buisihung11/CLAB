@@ -71,13 +71,9 @@ void sortDescending(int* ptr,int length){
 		printf("%d\t", copyArr[i]);
 	}
 }
-
-void searchValue(int * ptr,int length){
+int searchPositionValue(int * ptr,int length,int value){
 	int index = -1;
-	int value;
-	printf("Enter your value you want to search: ");
-	fflush(stdin);
-	scanf("%d",&value);
+	
 	for (int i = 0; i < length; ++i)
 	{
 		if(value == ptr[i]){
@@ -85,11 +81,17 @@ void searchValue(int * ptr,int length){
 			break;
 		}
 	}
-	if(index!= -1)
-		printf("Your value is in %d position\n",index );
-	else
-		printf("Cannot find the value\n");
+	return index;
 }
+void removeFirstExistElement(int *ptr, int* length,int value){
+	int lengthTemp = *length;
+	for(int i=searchPositionValue(ptr,lengthTemp,value);i<lengthTemp-1 && i!= -1;i++){
+		ptr[i]=ptr[i+1];
+	}
+	(*length)--;
+}
+
+
 
 void menu(){
 	int userChocie;
@@ -111,17 +113,28 @@ void menu(){
 		printf("=========\n");
 		printf("Your choice: ");
 		scanf("%d",&userChocie);
+		int value;
 		switch(userChocie){
 			case 1: 
 				addItem(ptrArr,&length);
 				break;
 			case 2:
-				searchValue(ptrArr,length);
+				
+				printf("Enter your value you want to search: ");
+				fflush(stdin);
+				scanf("%d",&value);
+				int check = searchPositionValue(ptrArr,length,value);
+				if(check!= -1)
+					printf("Your value is in %d position\n",check );
+				else
+					printf("Cannot find the value\n");
 				break;
 			case 3:
-				if(length > 1)
-					ptrArr = &ptrArr[1];
-					length--;
+				
+				printf("Enter your value you want to remove: ");
+				fflush(stdin);
+				scanf("%d",&value);
+				removeFirstExistElement(ptrArr,&length,value);
 				break;
 			case 4:
 				free(ptrArr);
@@ -133,7 +146,10 @@ void menu(){
 				break;
 			case 6:
 				sortAscending(ptrArr,length);
-				break;	
+				break;
+			case 7:
+				sortDescending(ptrArr,length);
+				break;		
 		}
 
 

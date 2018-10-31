@@ -1,0 +1,95 @@
+#include<conio.h>
+#include<stdio.h>
+#include<iostream>
+#include<string.h>
+
+using namespace std;
+
+class Nguoi
+{
+
+char hoten[30];
+
+public:
+
+//phuong thuc ao
+
+virtual void nhap()
+{
+cout<<“\nHo ten:”; cin.getline(hoten,30);
+}
+
+//phuong thuc thuc ao (truu tuong)
+virtual int thuong()=0;
+
+//phuong thuc ao
+virtual void xuat()
+{
+cout<<“\nHo ten:”<<hoten;
+}
+};
+
+// class sinhvien
+class Sinhvien:public Nguoi
+{
+float dttn;
+public:
+//dinh nghia lai phuong thuc nhap
+void nhap()
+{
+Nguoi::nhap();
+cout<<“\nDiem thi tn:”; cin>>dttn;
+}
+
+//dinh nghia lai phuong thuc thuong
+int thuong()
+{
+return (dttn>8?1:0);
+}
+
+void xuat()
+{
+cout<<“\n-Sinh vien:”;
+Nguoi::xuat();
+cout<<“\nDiem thi tn:”<<dttn;
+}
+};
+class Giangvien:public Nguoi
+{
+int sobaibao;
+public:
+void nhap()
+{
+Nguoi::nhap();
+cout<<“\nSo bai bao:”; cin>>sobaibao;
+}
+int thuong()
+{
+return (sobaibao>3?1:0);
+}
+void xuat()
+{
+cout<<“\n-Giang vien:”;
+Nguoi::xuat();
+cout<<“\nSo bai bao:”<<sobaibao;
+}
+};
+
+// ham main
+int main()
+{
+Nguoi *ds[100]; int k=0, chon, i;
+while(1)
+{
+cout<<“\n*Chon: Gv / Sv / Close (1,2,3):”;
+cin>>chon;  cin.get();
+if (chon==3) break;
+if (chon==1) ds[k]=new Giangvien();
+if (chon==2) ds[k]=new Sinhvien();
+ds[k]->nhap(); k++;
+}
+cout<<“\n*Danh sach nhung nguoi duoc thuong”;
+for (i=0; i<k; i++)
+if (ds[i]->thuong()) ds[i]->xuat();
+return 0;
+}
