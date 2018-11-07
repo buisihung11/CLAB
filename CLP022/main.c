@@ -72,7 +72,7 @@ void writeDataToFile(Student** studentList,int length){
 	fclose(f);
 }
 
-void readFile(Student** studentList,int* length){
+void readFile(Student** studentList,int* length){	
 	FILE *f =fopen("data.txt","r");
 	char name[50];
 	char code[50];

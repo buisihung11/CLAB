@@ -27,6 +27,7 @@ typedef struct
 flight* creatFlight(char *from,char *to, int seat){
 	flight* flightObj;
 	flightObj = malloc(sizeof(flight));
+	//thay strdup bang malloc mot char* 
 	flightObj -> fromPlace = strdup(from);//make a copy of from because we use ptr to fromPlace
 	flightObj -> toPlace = strdup(to);
 	//flightObj -> seat = seat1;
@@ -65,6 +66,8 @@ flight** writeData(int *count){
 
 int hasFlight(char *from,char *to,char userGoFrom[30],char userGoTo[30]){
 	int check = FALSE;
+	//neu nhu truon ghop so sanh ignore case thi phai lopp tung ki tu 
+	
 	if(strstr(userGoFrom,from)>0 && strstr(userGoTo,to)>0){
 			check = TRUE;
 		}
